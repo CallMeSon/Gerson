@@ -203,3 +203,16 @@ body {
   filter: grayscale(0) brightness(1);
   transform: scale(1.08);
 }
+
+/* ─── SCROLLBAR & MASK UTILITIES ───────────────────────────────────── */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.mask-fade {
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
