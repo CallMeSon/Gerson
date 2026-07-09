@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Lexend+Deca:wght@100..900&display=swap');
+
+@theme {
+  --font-plus-jakarta: "Plus Jakarta Sans", sans-serif;
+  --font-lexend-deca: "Lexend Deca", sans-serif;
+}
+
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: var(--font-plus-jakarta);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* ─── GLASSMORPHISM NAVBAR ──────────────────────────────────────────── */
+.glass-nav {
+  backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ─── HOVER GLOWS ───────────────────────────────────────────────────── */
+.hover-glow {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-glow:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(23, 98, 209, 0.45), 0 8px 24px rgba(23, 98, 209, 0.2);
+}
+
+.hover-glow-orange {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-glow-orange:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(183, 74, 25, 0.45), 0 8px 24px rgba(183, 74, 25, 0.2);
+}
+
+/* ─── ANIMATED BLOBS ────────────────────────────────────────────────── */
+@keyframes blobFloat1 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33%       { transform: translate(40px, -30px) scale(1.04); }
+  66%       { transform: translate(-25px, 20px) scale(0.97); }
+}
+
+@keyframes blobFloat2 {
+  0%, 100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+  33%       { transform: translate(-50px, 35px) scale(1.06) rotate(3deg); }
+  66%       { transform: translate(30px, -20px) scale(0.95) rotate(-2deg); }
+}
+
+@keyframes blobFloat3 {
+  0%, 100% { transform: translate(0px, 0px) rotate(77.22deg) scale(1); }
+  50%       { transform: translate(60px, -40px) rotate(80deg) scale(1.05); }
+}
+
+.blob-1 { animation: blobFloat1 28s ease-in-out infinite; }
+.blob-2 { animation: blobFloat2 36s ease-in-out infinite; }
+.blob-3 { animation: blobFloat2 32s ease-in-out infinite reverse; }
+.blob-4 { animation: blobFloat3 42s ease-in-out infinite; }
+
+/* ─── PARTICLE STARS ────────────────────────────────────────────────── */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50%       { opacity: 0.8; transform: scale(1.4); }
+}
+
+@keyframes drift {
+  0%         { transform: translateY(0px) translateX(0px); }
+  33%        { transform: translateY(-15px) translateX(8px); }
+  66%        { transform: translateY(8px) translateX(-12px); }
+  100%       { transform: translateY(0px) translateX(0px); }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  animation: twinkle var(--duration, 4s) ease-in-out infinite var(--delay, 0s),
+             drift var(--drift-duration, 12s) ease-in-out infinite var(--drift-delay, 0s);
+}
+
+/* ─── SHIMMER ON SKILL CARDS ─────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { left: -100%; }
+  100% { left: 150%; }
+}
+
+.skill-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 100%
+  );
+  transform: skewX(-15deg);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.skill-card:hover::before {
+  opacity: 1;
+  animation: shimmer 0.75s ease forwards;
+}
+
+/* ─── TYPEWRITER CURSOR ─────────────────────────────────────────────── */
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: #266ed9;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blinkCursor 0.85s step-end infinite;
+  border-radius: 2px;
+}
+
+/* ─── GRADIENT TEXT ─────────────────────────────────────────────────── */
+.gradient-text-blue {
+  background: linear-gradient(135deg, #266ed9 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-orange {
+  background: linear-gradient(135deg, #b14c1f 0%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── FLOATING BADGE ANIMATION ──────────────────────────────────────── */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+.float-badge {
+  animation: gentleFloat 3.5s ease-in-out infinite;
+}
+
+/* ─── GLOW PULSE ON CTA BUTTON ──────────────────────────────────────── */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(38, 110, 217, 0.4); }
+  50%       { box-shadow: 0 0 28px rgba(38, 110, 217, 0.8), 0 0 48px rgba(38, 110, 217, 0.3); }
+}
+
+.cta-glow {
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+/* ─── SCROLL PROGRESS BAR ───────────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #266ed9, #b14c1f);
+  z-index: 10000;
+  transform-origin: left;
+  box-shadow: 0 0 8px rgba(38, 110, 217, 0.8);
+}
+
+/* ─── SECTION DIVIDER GLOW LINE ─────────────────────────────────────── */
+.glow-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(38, 110, 217, 0.4), transparent);
+  margin: 0 auto;
+  width: 80%;
+}
+
+/* ─── BRAND LOGO HOVER ──────────────────────────────────────────────── */
+.brand-logo {
+  transition: all 0.4s ease;
+  filter: grayscale(1) brightness(0.7);
+}
+
+.brand-logo:hover {
+  filter: grayscale(0) brightness(1);
+  transform: scale(1.08);
+}
