@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { assets } from './assets';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Navbar from './components/Navbar';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import ParticleStars from './components/ParticleStars';
@@ -88,6 +88,14 @@ export default function App() {
     setFormImgUrl(''); setFormProjUrl(''); setFormGitUrl('');
   };
 
+  // ── Parallax Background ───────────────────────────────────────────────────────
+  const { scrollYProgress } = useScroll();
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, -300]);
+  const y4 = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const y5 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
   // ── Render ────────────────────────────────────────────────────────────────────
   return (
     <div className="bg-[#121212] min-h-screen text-white relative font-plus-jakarta overflow-x-hidden">
@@ -95,21 +103,65 @@ export default function App() {
       <ScrollProgressBar />
       <ParticleStars count={70} />
 
-      {/* Background animated blobs */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
-        <div className="absolute opacity-30 blob-1" style={{ top: '-318px', left: '-1151px', width: '1782px', height: '1514px', filter: 'blur(100px)' }}>
-          <img src={assets.imgGroup1} alt="" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute opacity-20 blob-2" style={{ top: '455px', left: '33%', width: '1782px', height: '1532px', filter: 'blur(100px)' }}>
-          <img src={assets.imgGroup2} alt="" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute opacity-20 blob-3" style={{ top: '1611px', left: '-260px', width: '1782px', height: '1532px', filter: 'blur(100px)' }}>
-          <img src={assets.imgGroup2} alt="" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute opacity-10 blob-4" style={{ top: '3048px', left: '-796px', width: '2867px', height: '2721px', filter: 'blur(100px)' }}>
-          <img src={assets.imgGroup4} alt="" className="w-full h-full object-cover" />
-        </div>
+      {/* Background blobs — subtle CSS radial gradients matching Figma design */}
+      <div className="pointer-events-none fixed inset-0 overflow-hidden" style={{ zIndex: 0 }}>
+        {/* Blob 1 — warm orange glow, upper-left */}
+        <motion.div style={{
+          position: 'absolute',
+          top: '2%',
+          left: '-4%',
+          width: '35%',
+          height: '40%',
+          background: 'radial-gradient(ellipse at 25% 35%, rgba(160, 65, 20, 0.28) 0%, rgba(100, 35, 10, 0.10) 50%, transparent 75%)',
+          filter: 'blur(55px)',
+          y: y1,
+        }} />
+        {/* Blob 2 — orange glow, right side mid */}
+        <motion.div style={{
+          position: 'absolute',
+          top: '28%',
+          right: '-2%',
+          width: '28%',
+          height: '35%',
+          background: 'radial-gradient(ellipse at 75% 45%, rgba(155, 65, 20, 0.22) 0%, rgba(90, 30, 8, 0.08) 50%, transparent 75%)',
+          filter: 'blur(50px)',
+          y: y2,
+        }} />
+        {/* Blob 3 — blue-grey cool accent, left center */}
+        <motion.div style={{
+          position: 'absolute',
+          top: '45%',
+          left: '-3%',
+          width: '30%',
+          height: '32%',
+          background: 'radial-gradient(ellipse at 20% 60%, rgba(45, 65, 130, 0.18) 0%, rgba(25, 40, 90, 0.07) 50%, transparent 75%)',
+          filter: 'blur(60px)',
+          y: y3,
+        }} />
+        {/* Blob 4 — orange glow, lower-left */}
+        <motion.div style={{
+          position: 'absolute',
+          bottom: '8%',
+          left: '-2%',
+          width: '25%',
+          height: '30%',
+          background: 'radial-gradient(ellipse at 20% 80%, rgba(165, 70, 20, 0.30) 0%, rgba(100, 40, 10, 0.10) 50%, transparent 75%)',
+          filter: 'blur(50px)',
+          y: y4,
+        }} />
+        {/* Blob 5 — faint blue, upper-right */}
+        <motion.div style={{
+          position: 'absolute',
+          top: '5%',
+          right: '5%',
+          width: '22%',
+          height: '28%',
+          background: 'radial-gradient(ellipse at 70% 20%, rgba(40, 60, 140, 0.14) 0%, rgba(20, 35, 90, 0.05) 55%, transparent 80%)',
+          filter: 'blur(70px)',
+          y: y5,
+        }} />
       </div>
+
 
       {/* Main content container */}
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-6 relative z-10">

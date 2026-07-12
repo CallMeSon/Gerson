@@ -1,8 +1,1 @@
-INSERT INTO projects (name, scope, description, image_url, project_url, github_url) VALUES
-('E-Commerce Web App', 'Fullstack Development', 'A fully functional e-commerce platform built with React, Node.js, and PostgreSQL.', 'https://picsum.photos/id/1/400/250', 'https://example.com/shop', 'https://github.com/example/shop'),
-('Personal Portfolio Website', 'UI/UX Design & Frontend', 'My personal developer portfolio designed in Figma and coded with React and Tailwind CSS.', 'https://picsum.photos/id/2/400/250', 'https://example.com/portfolio', 'https://github.com/example/portfolio'),
-('Mobile Health Tracker', 'Mobile Development', 'A cross-platform React Native app for tracking daily steps, calorie intake, and sleep schedules.', 'https://picsum.photos/id/3/400/250', 'https://example.com/health', 'https://github.com/example/health'),
-('Task Management API', 'Backend Development', 'A robust RESTful API built with Express, PostgreSQL, and JWT authentication for team management.', 'https://picsum.photos/id/4/400/250', 'https://example.com/task-api', 'https://github.com/example/task-api'),
-('AI Chatbot Assistant', 'AI Integration', 'An interactive chatbot integration using OpenAI API and Express for customer service automation.', 'https://picsum.photos/id/5/400/250', 'https://example.com/ai-bot', 'https://github.com/example/ai-bot'),
-('DevOps CI/CD Pipeline', 'Cloud Engineering', 'A fully automated pipeline for continuous integration and deployment using Docker and GitHub Actions.', 'https://picsum.photos/id/6/400/250', 'https://example.com/devops', 'https://github.com/example/devops')
-ON CONFLICT (id) DO NOTHING;
+-- Seeding is disabled/empty for now

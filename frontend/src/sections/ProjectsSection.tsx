@@ -74,16 +74,26 @@ export default function ProjectsSection({
           ))}
         </div>
       ) : projects.length === 0 ? (
-        <motion.div
-          className="text-center py-20 bg-white/[0.01] border border-dashed border-white/10 rounded-xl flex flex-col items-center gap-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <p className="text-gray-400">Belum ada proyek dalam database PostgreSQL.</p>
-          <Button onClick={onOpenAdmin} variant="primary" size="sm">
-            Tambah Proyek Pertama
-          </Button>
-        </motion.div>
+        isAdminMode ? (
+          <motion.div
+            className="text-center py-20 bg-white/[0.01] border border-dashed border-white/10 rounded-xl flex flex-col items-center gap-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <p className="text-gray-400">Belum ada proyek dalam database PostgreSQL.</p>
+            <Button onClick={onOpenAdmin} variant="primary" size="sm">
+              Tambah Proyek Pertama
+            </Button>
+          </motion.div>
+        ) : (
+          <motion.div
+            className="text-center py-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            <p className="text-gray-400 text-lg font-light">Sabar yah masih di siapin 😊</p>
+          </motion.div>
+        )
       ) : (
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
@@ -151,9 +161,11 @@ export default function ProjectsSection({
         </motion.div>
       )}
 
-      <RevealSection className="flex justify-center">
-        <Button variant="primary">Explore More</Button>
-      </RevealSection>
+      {projects.length > 6 && (
+        <RevealSection className="flex justify-center">
+          <Button variant="primary">Explore More</Button>
+        </RevealSection>
+      )}
     </section>
   );
 }
