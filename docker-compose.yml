@@ -37,11 +37,26 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - VITE_APP_MODE=guest # Build as 'guest' mode by default. Change to 'admin' if you want admin panel enabled.
+        - VITE_APP_MODE=guest
     container_name: gerson-frontend
     restart: always
     ports:
       - "8090:80"
+    depends_on:
+      - backend
+    networks:
+      - portfolio-network
+
+  frontend-admin:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_APP_MODE=admin
+    container_name: gerson-frontend-admin
+    restart: always
+    ports:
+      - "8091:80" # Akses khusus admin. Hubungkan ke Nginx utama dengan Basic Auth atau batasi ke jaringan lokal.
     depends_on:
       - backend
     networks:
