@@ -15,6 +15,13 @@ export default function HeroSection() {
   const heroOpacity = useTransform(heroScroll, [0, 0.8], [1, 0]);
   const typewriterText = useTypewriter(['Best Unemployment', 'UI/UX Designer', 'Fullstack Dev', 'Problem Solver']);
 
+  const playMottoSound = () => {
+    const audio = new Audio('/hidup-jokowi.mp3');
+    audio.play().catch((err) => {
+      console.warn('Gagal memutar audio:', err);
+    });
+  };
+
   return (
     <section id="about" ref={heroRef} className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-32">
 
@@ -58,7 +65,7 @@ export default function HeroSection() {
           <Button variant="primary" size="lg" asAnchor href="#contact">
             Hire Me
           </Button>
-          <Button variant="outline" size="lg" asAnchor href="#motto">
+          <Button variant="outline" size="lg" onClick={playMottoSound}>
             My Motto
           </Button>
         </motion.div>

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { NAV_ITEMS } from './NavbarModel';
 
 export function useNavbarController(onAdminClick?: () => void) {
-  const [isSticky, setIsSticky] = useState(false);
+  const [isSticky, setIsSticky] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
 
@@ -61,7 +61,7 @@ export function useNavbarController(onAdminClick?: () => void) {
   const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     closeMobileMenu();
-    
+
     const targetId = href.substring(1);
     const element = document.getElementById(targetId);
     if (element) {
@@ -71,10 +71,14 @@ export function useNavbarController(onAdminClick?: () => void) {
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - offset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      if ((window as any).lenis) {
+        (window as any).lenis.scrollTo(offsetPosition);
+      } else {
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
     }
   }, [closeMobileMenu]);
 

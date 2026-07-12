@@ -25,7 +25,7 @@ export default function Footer() {
               <span className="text-[27px] font-bold tracking-tight">gerson</span>
             </div>
             <p className="text-[#b6b6b6] font-extralight text-[18px] leading-normal max-w-sm whitespace-pre-wrap">
-              {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempus  arcu ante, at finibus neque laoreet sed.`}
+              A passionate UI/UX Designer and Fullstack Developer crafting beautiful, interactive, and user-centric digital experiences.
             </p>
             <div className="flex items-center gap-8">
               <a href="https://github.com" target="_blank" rel="noreferrer" className="w-8 h-[31px] hover:opacity-80 transition" data-cursor-hover>

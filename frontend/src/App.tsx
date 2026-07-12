@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import ParticleStars from './components/ParticleStars';
@@ -16,6 +17,31 @@ const API_URL = import.meta.env.DEV ? 'http://localhost:5000/api/projects' : '/a
 const isAdminMode = import.meta.env.VITE_APP_MODE === 'admin';
 
 export default function App() {
+  // ── Lenis Smooth Scrolling ──────────────────────────────────────────────────
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+    });
+
+    (window as any).lenis = lenis;
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+      (window as any).lenis = null;
+    };
+  }, []);
+
   // ── Data state ───────────────────────────────────────────────────────────────
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);

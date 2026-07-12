@@ -1,6 +1,6 @@
-@import "tailwindcss";
-
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Lexend+Deca:wght@100..900&display=swap');
+
+@import "tailwindcss";
 
 @theme {
   --font-plus-jakarta: "Plus Jakarta Sans", sans-serif;
@@ -14,6 +14,19 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Allow pointer events on links/buttons that contain images */
+a img, button img {
+  pointer-events: auto;
 }
 
 /* ─── GLASSMORPHISM NAVBAR ──────────────────────────────────────────── */
@@ -216,3 +229,25 @@ body {
   mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
+
+/* ─── LENIS SMOOTH SCROLLING ────────────────────────────────────────── */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overflow: clip;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+

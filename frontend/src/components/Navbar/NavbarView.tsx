@@ -26,11 +26,10 @@ export function NavbarView({
 }: NavbarViewProps) {
   return (
     <motion.nav
-      className={`glass-nav rounded-2xl flex flex-col justify-center px-6 py-3 transition-all duration-300 shadow-lg ${
-        isSticky
-          ? 'fixed top-4 left-4 right-4 z-50 max-w-[1376px] mx-auto'
-          : 'relative mb-16'
-      }`}
+      className={`glass-nav rounded-2xl flex flex-col justify-center px-6 py-3 transition-all duration-300 shadow-lg ${isSticky
+        ? 'fixed top-4 left-4 right-4 z-50 max-w-[1376px] mx-auto'
+        : 'relative mb-16'
+        }`}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
@@ -39,7 +38,7 @@ export function NavbarView({
         {/* Logo */}
         <div className="flex items-center gap-3">
           <img alt="Logo" className="w-[38px] h-[41px] object-contain" src={logoImg} />
-          <span className="text-[27px] font-bold tracking-tight text-white capitalize">Gerson</span>
+          <span className="text-[27px] font-bold tracking-tight text-white">gerson</span>
         </div>
 
         {/* Desktop Nav Links */}
@@ -51,11 +50,10 @@ export function NavbarView({
                 key={item.label}
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href)}
-                className={`px-4 py-1.5 font-light hover:text-white transition relative group text-[16px] ${
-                  isActive
-                    ? 'bg-[rgba(128,128,128,0.32)] rounded-[4px] text-white font-normal'
-                    : 'text-[#e8e8e8]'
-                }`}
+                className={`px-4 py-1.5 font-light hover:text-white transition relative group text-[16px] ${isActive
+                  ? 'bg-[rgba(128,128,128,0.32)] rounded-[4px] text-white font-normal'
+                  : 'text-[#e8e8e8]'
+                  }`}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + i * 0.08, duration: 0.4 }}
@@ -146,11 +144,10 @@ export function NavbarView({
                   key={item.label}
                   href={item.href}
                   onClick={(e) => scrollToSection(e, item.href)}
-                  className={`px-4 py-2 text-sm font-light transition rounded-md ${
-                    isActive
-                      ? 'bg-[rgba(128,128,128,0.32)] text-white font-normal'
-                      : 'text-[#e8e8e8] hover:bg-white/5'
-                  }`}
+                  className={`px-4 py-2 text-sm font-light transition rounded-md ${isActive
+                    ? 'bg-[rgba(128,128,128,0.32)] text-white font-normal'
+                    : 'text-[#e8e8e8] hover:bg-white/5'
+                    }`}
                 >
                   {item.label}
                 </a>
