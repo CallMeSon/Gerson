@@ -12,7 +12,7 @@ import Footer from './sections/Footer';
 import AdminPanel from './sections/AdminPanel';
 import type { Project } from './sections/ProjectsSection';
 
-const API_URL = 'http://localhost:5000/api/projects';
+const API_URL = import.meta.env.DEV ? 'http://localhost:5000/api/projects' : '/api/projects';
 const isAdminMode = import.meta.env.VITE_APP_MODE === 'admin';
 
 export default function App() {
