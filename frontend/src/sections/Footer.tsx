@@ -28,10 +28,10 @@ export default function Footer() {
               A passionate UI/UX Designer and Fullstack Developer crafting beautiful, interactive, and user-centric digital experiences.
             </p>
             <div className="flex items-center gap-8">
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="w-8 h-[31px] hover:opacity-80 transition" data-cursor-hover>
+              <a href="https://github.com/CallMeSon" target="_blank" rel="noreferrer" className="w-8 h-[31px] hover:opacity-80 transition" data-cursor-hover>
                 <img alt="Github" src={githubIcon} className="w-full h-full object-contain" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="w-8 h-8 hover:opacity-80 transition" data-cursor-hover>
+              <a href="https://www.linkedin.com/in/gerson-sebastian-860124261/" target="_blank" rel="noreferrer" className="w-8 h-8 hover:opacity-80 transition" data-cursor-hover>
                 <img alt="Linkedin" src={linkedinIcon} className="w-full h-full object-contain" />
               </a>
             </div>

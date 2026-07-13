@@ -16,7 +16,7 @@ export default function HeroSection() {
   const typewriterText = useTypewriter(['Best Unemployment', 'UI/UX Designer', 'Fullstack Dev', 'Problem Solver']);
 
   const playMottoSound = () => {
-    const audio = new Audio('/hidup-jokowi.mp3');
+    const audio = new Audio('/hidup-jokowi.ogg');
     audio.play().catch((err) => {
       console.warn('Gagal memutar audio:', err);
     });

@@ -8,20 +8,20 @@ import problemsolvImg from '../assets/problemsolv.png';
 const SKILLS = [
   {
     img: uxImg,
-    title: 'UI/UX',
-    desc: 'Lorem ipsum description of skills',
+    title: 'UI/UX Design',
+    desc: 'Merancang antarmuka pengguna yang intuitif, estetis, dan mudah digunakan.',
     border: 'hover:border-[#8B5CF6]/60',
   },
   {
     img: uiEngineerImg,
     title: 'UI Engineer',
-    desc: 'Lorem ipsum description of skills',
+    desc: 'Mengimplementasikan desain pixel-perfect menjadi kode frontend yang responsif dan cepat.',
     border: 'hover:border-[#266ed9]/60',
   },
   {
     img: problemsolvImg,
     title: 'Problem Solving',
-    desc: 'Lorem ipsum description of skills',
+    desc: 'Memecahkan tantangan teknis yang kompleks dengan solusi kode yang efisien.',
     border: 'hover:border-[#b14c1f]/60',
   },
 ];
@@ -31,7 +31,7 @@ export default function SkillsSection() {
     <section id="skills" className="mb-32">
       <RevealSection className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-bold mb-4">
-          <span className="gradient-text-blue">My Skill</span> Saya
+          <span className="gradient-text-blue">Keahlian</span> Saya
         </h2>
         <p className="text-[#e8e8e8] font-light max-w-xl mx-auto">
           Love to explore on design and building software, I will create solution

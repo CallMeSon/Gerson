@@ -41,7 +41,7 @@ export default function ContactSection() {
         <p className="text-gray-400 font-light leading-relaxed">
           Tapi secara profesional, saya bersemangat mempelajari fullstack web development dan siap mendedikasikan waktu saya untuk membantu membangun solusi digital hebat di tim Anda.
         </p>
-        <Button variant="orange" size="lg" asAnchor href="mailto:gerson.sebastian@example.com">
+        <Button variant="orange" size="lg" asAnchor href="mailto:sebastiangerson24@gmail.com">
           Hire Me
         </Button>
       </motion.div>

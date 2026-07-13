@@ -84,10 +84,10 @@ export function NavbarView({
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <a href="https://github.com" target="_blank" rel="noreferrer" className="w-8 h-[31px] hover:opacity-80 transition" data-cursor-hover>
+          <a href="https://github.com/CallMeSon" target="_blank" rel="noreferrer" className="w-8 h-[31px] hover:opacity-80 transition" data-cursor-hover>
             <img alt="Github" src={githubIcon} className="w-full h-full object-contain" />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="w-8 h-8 hover:opacity-80 transition" data-cursor-hover>
+          <a href="https://www.linkedin.com/in/gerson-sebastian-860124261/" target="_blank" rel="noreferrer" className="w-8 h-8 hover:opacity-80 transition" data-cursor-hover>
             <img alt="Linkedin" src={linkedinIcon} className="w-full h-full object-contain" />
           </a>
         </motion.div>
@@ -154,10 +154,10 @@ export function NavbarView({
               );
             })}
             <div className="flex items-center gap-6 px-4 py-2 border-t border-white/5 mt-2">
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="w-6 h-6 hover:opacity-80 transition">
+              <a href="https://github.com/CallMeSon" target="_blank" rel="noreferrer" className="w-6 h-6 hover:opacity-80 transition">
                 <img alt="Github" src={githubIcon} className="w-full h-full object-contain" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="w-6 h-6 hover:opacity-80 transition">
+              <a href="https://www.linkedin.com/in/gerson-sebastian-860124261/" target="_blank" rel="noreferrer" className="w-6 h-6 hover:opacity-80 transition">
                 <img alt="Linkedin" src={linkedinIcon} className="w-full h-full object-contain" />
               </a>
             </div>
