@@ -14,6 +14,7 @@ import AdminPanel from './sections/AdminPanel';
 import type { Project } from './sections/ProjectsSection';
 
 const API_URL = import.meta.env.DEV ? 'http://localhost:5000/api/projects' : '/api/projects';
+const UPLOAD_URL = import.meta.env.DEV ? 'http://localhost:5000/api/upload' : '/api/upload';
 const isAdminMode = import.meta.env.VITE_APP_MODE === 'admin';
 
 export default function App() {
@@ -52,7 +53,6 @@ export default function App() {
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [formName, setFormName] = useState('');
   const [formScope, setFormScope] = useState('');
-  const [formDesc, setFormDesc] = useState('');
   const [formImgUrl, setFormImgUrl] = useState('');
   const [formProjUrl, setFormProjUrl] = useState('');
   const [formGitUrl, setFormGitUrl] = useState('');
@@ -78,7 +78,7 @@ export default function App() {
   // ── CRUD operations ───────────────────────────────────────────────────────────
   const handleSaveProject = async (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = { name: formName, scope: formScope, description: formDesc, image_url: formImgUrl, project_url: formProjUrl, github_url: formGitUrl };
+    const payload = { name: formName, scope: formScope, image_url: formImgUrl, project_url: formProjUrl, github_url: formGitUrl };
     try {
       const res = editingProject
         ? await fetch(`${API_URL}/${editingProject.id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
@@ -93,7 +93,6 @@ export default function App() {
     setEditingProject(project);
     setFormName(project.name);
     setFormScope(project.scope);
-    setFormDesc(project.description);
     setFormImgUrl(project.image_url);
     setFormProjUrl(project.project_url);
     setFormGitUrl(project.github_url);
@@ -110,7 +109,7 @@ export default function App() {
 
   const resetForm = () => {
     setEditingProject(null);
-    setFormName(''); setFormScope(''); setFormDesc('');
+    setFormName(''); setFormScope('');
     setFormImgUrl(''); setFormProjUrl(''); setFormGitUrl('');
   };
 
@@ -202,6 +201,11 @@ export default function App() {
           isAdminMode={isAdminMode}
           fetchProjects={fetchProjects}
           onOpenAdmin={() => setIsAdminOpen(true)}
+          onEditClick={(project) => {
+            handleEditClick(project);
+            setIsAdminOpen(true);
+          }}
+          onDelete={handleDeleteProject}
         />
         <ContactSection />
       </div>
@@ -217,13 +221,12 @@ export default function App() {
           editingProject={editingProject}
           formName={formName}
           formScope={formScope}
-          formDesc={formDesc}
           formImgUrl={formImgUrl}
           formProjUrl={formProjUrl}
           formGitUrl={formGitUrl}
+          uploadEndpoint={UPLOAD_URL}
           setFormName={setFormName}
           setFormScope={setFormScope}
-          setFormDesc={setFormDesc}
           setFormImgUrl={setFormImgUrl}
           setFormProjUrl={setFormProjUrl}
           setFormGitUrl={setFormGitUrl}

@@ -7,11 +7,19 @@ export interface Project {
   id: number;
   name: string;
   scope: string;
-  description: string;
   image_url: string;
   project_url: string;
   github_url: string;
 }
+
+const getImageUrl = (url: string) => {
+  if (!url) return 'https://picsum.photos/400/250';
+  if (url.startsWith('/uploads/')) {
+    const backendBase = import.meta.env.DEV ? 'http://localhost:5000' : '';
+    return `${backendBase}${url}`;
+  }
+  return url;
+};
 
 interface ProjectsSectionProps {
   projects: Project[];
@@ -20,6 +28,8 @@ interface ProjectsSectionProps {
   isAdminMode: boolean;
   fetchProjects: () => void;
   onOpenAdmin: () => void;
+  onEditClick: (project: Project) => void;
+  onDelete: (id: number) => void;
 }
 
 export default function ProjectsSection({
@@ -29,6 +39,8 @@ export default function ProjectsSection({
   isAdminMode,
   fetchProjects,
   onOpenAdmin,
+  onEditClick,
+  onDelete,
 }: ProjectsSectionProps) {
   return (
     <section id="projects" className="mb-32 scroll-mt-6">
@@ -116,15 +128,15 @@ export default function ProjectsSection({
                 <motion.img
                   alt={project.name}
                   className="w-full h-full object-cover"
-                  src={project.image_url || 'https://picsum.photos/400/250'}
+                  src={getImageUrl(project.image_url)}
                   whileHover={{ scale: 1.08 }}
                   transition={{ duration: 0.5 }}
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = 'https://picsum.photos/400/250';
                   }}
                 />
-                <motion.div
-                  className="absolute inset-0 bg-black/60 flex items-center justify-center gap-4"
+                 <motion.div
+                  className="absolute inset-0 bg-black/60 flex items-center justify-center gap-2 flex-wrap p-4"
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
                   transition={{ duration: 0.25 }}
@@ -147,13 +159,32 @@ export default function ProjectsSection({
                       GitHub
                     </Button>
                   )}
+                  {isAdminMode && (
+                    <>
+                      <Button
+                        onClick={() => onEditClick(project)}
+                        variant="outline"
+                        size="sm"
+                        className="!border-blue-500 !text-blue-400 hover:!bg-blue-500/20"
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        onClick={() => onDelete(project.id)}
+                        variant="red"
+                        size="sm"
+                        className="!border-red-500 !text-red-400 hover:!bg-red-500/20"
+                      >
+                        Hapus
+                      </Button>
+                    </>
+                  )}
                 </motion.div>
               </div>
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
                   <span className="text-xs text-[#266ed9] uppercase tracking-wider font-semibold block mb-2">{project.scope}</span>
                   <h3 className="text-xl font-bold mb-2 text-white">{project.name}</h3>
-                  <p className="text-sm text-gray-400 font-light line-clamp-3 mb-4">{project.description}</p>
                 </div>
               </div>
             </motion.div>

@@ -2,7 +2,6 @@ CREATE TABLE IF NOT EXISTS projects (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   scope VARCHAR(255) NOT NULL,
-  description TEXT,
   image_url VARCHAR(500),
   project_url VARCHAR(500),
   github_url VARCHAR(500),

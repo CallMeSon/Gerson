@@ -12,6 +12,7 @@ RUN npm ci --only=production
 COPY --from=builder /app/dist ./dist
 # Copy raw schema and seed files because migrate.js reads them dynamically
 COPY src/db/*.sql ./dist/db/
+RUN mkdir -p /app/assets/uploads
 
 EXPOSE 5000
 CMD ["node", "dist/index.js"]

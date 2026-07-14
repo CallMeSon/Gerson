@@ -1,4 +1,5 @@
 import Button from '../components/Button';
+import ImageDropZone from '../components/ImageDropZone';
 import type { Project } from './ProjectsSection';
 
 interface AdminPanelProps {
@@ -8,13 +9,12 @@ interface AdminPanelProps {
   editingProject: Project | null;
   formName: string;
   formScope: string;
-  formDesc: string;
   formImgUrl: string;
   formProjUrl: string;
   formGitUrl: string;
+  uploadEndpoint: string;
   setFormName: (v: string) => void;
   setFormScope: (v: string) => void;
-  setFormDesc: (v: string) => void;
   setFormImgUrl: (v: string) => void;
   setFormProjUrl: (v: string) => void;
   setFormGitUrl: (v: string) => void;
@@ -31,13 +31,12 @@ export default function AdminPanel({
   editingProject,
   formName,
   formScope,
-  formDesc,
   formImgUrl,
   formProjUrl,
   formGitUrl,
+  uploadEndpoint,
   setFormName,
   setFormScope,
-  setFormDesc,
   setFormImgUrl,
   setFormProjUrl,
   setFormGitUrl,
@@ -98,22 +97,10 @@ export default function AdminPanel({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-gray-400 mb-1">Deskripsi Proyek</label>
-              <textarea
-                rows={3} value={formDesc}
-                onChange={(e) => setFormDesc(e.target.value)}
-                placeholder="Deskripsi singkat mengenai proyek..."
-                className="w-full bg-[#121212] border border-white/10 focus:border-blue-500 rounded px-3 py-2 text-sm outline-none transition resize-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-gray-400 mb-1">Image URL</label>
-              <input
-                type="text" value={formImgUrl}
-                onChange={(e) => setFormImgUrl(e.target.value)}
-                placeholder="https://picsum.photos/400/250"
-                className="w-full bg-[#121212] border border-white/10 focus:border-blue-500 rounded px-3 py-2 text-sm outline-none transition"
+              <ImageDropZone
+                currentUrl={formImgUrl}
+                onUploaded={setFormImgUrl}
+                uploadEndpoint={uploadEndpoint}
               />
             </div>
 

@@ -29,6 +29,8 @@ services:
       - "5000:5000"
     depends_on:
       - postgres
+    volumes:
+      - uploads_data:/app/assets/uploads
     networks:
       - portfolio-network
 
@@ -73,6 +75,7 @@ services:
 
 volumes:
   postgres_data:
+  uploads_data:
 
 networks:
   portfolio-network:
