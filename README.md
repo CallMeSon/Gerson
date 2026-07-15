@@ -53,76 +53,22 @@ This project is built using a modern, performant, and type-safe stack designed t
 
 ---
 
-## Deployment & Setup Guide
+## Deployment Method
 
-This project is designed to run in containerized environments. Below is a guide on how to configure and deploy the services.
+### How the Platform is Deployed
+The entire platform is containerized using Docker and orchestrated using Docker Compose. This architecture divides the system into isolated, modular services:
+*   **Database Service**: A PostgreSQL container handling relational data persistence.
+*   **Backend API**: A Node.js container executing the Express server.
+*   **Visitor Frontend**: An Nginx container serving the optimized visitor portfolio interface.
+*   **Admin Frontend**: A separate Nginx container serving the administrative control panel.
+*   **Database Management**: An Adminer container providing a secure web interface for data management.
 
-### Prerequisites
-Make sure your deployment environment has the following installed:
-*   Docker (v20.10 or higher)
-*   Docker Compose (v2.0 or higher)
+These services run within a private virtual network, allowing them to communicate securely using internal service names while exposing only designated traffic ports to the host system.
 
-### Environment Configuration
-The services rely on environment variables for database credentials and host bindings.
+### Why This Deployment Method is Used
+This containerized deployment strategy was chosen to achieve industry-standard software delivery and operations practices:
+*   **Environment Parity**: Containerization ensures the application runs identically across local development, staging, and live production environments, eliminating configuration drift.
+*   **Process Isolation**: Separating the database, API server, and web servers into individual containers limits dependencies, improves security, and ensures a failure in one service does not crash the others.
+*   **Simplified Infrastructure Management**: Rather than manually installing and configuring databases, Node.js runtimes, and Nginx servers on host machines, the complete system can be spun up or down predictably as code.
+*   **Security Control**: Exposing only the necessary public-facing web servers while keeping the database and API communication internal reduces the network attack surface.
 
-#### 1. Backend Configuration
-Create an environment file (e.g., `.env`) in the `backend` directory. Do not expose production secrets in version control.
-```env
-PORT=5000
-DATABASE_URL=postgresql://<DB_USER>:<DB_PASSWORD>@<DB_HOST>:<DB_PORT>/<DB_NAME>
-```
-*Note: In the default Docker Compose deployment, these variables are injected automatically via docker-compose configuration.*
-
-#### 2. Frontend Build Modes
-The frontend contains separate build commands for guest and admin viewports, configured through build arguments in Docker Compose:
-*   `VITE_APP_MODE=guest` loads environment configurations for the public-facing application.
-*   `VITE_APP_MODE=admin` loads environment configurations for the management dashboard.
-
-### Run with Docker Compose
-
-1. Clone the repository:
-   ```bash
-   git clone <REPOSITORY_URL>
-   cd <REPOSITORY_FOLDER>
-   ```
-
-2. Build and start all services in detached mode:
-   ```bash
-   docker compose up -d --build
-   ```
-   This command starts the following containers:
-   *   `gerson-postgres` (Database service)
-   *   `gerson-backend` (REST API server)
-   *   `gerson-frontend` (Visitor application)
-   *   `gerson-frontend-admin` (Administrator application)
-   *   `gerson-adminer` (Database web manager)
-
-3. Run database migrations:
-   To construct the database tables and apply the schema, run the migration command inside the backend container:
-   ```bash
-   docker compose exec backend npm run db:migrate:prod
-   ```
-
----
-
-## Access Points
-
-After successful initialization, the following local access routes will be active:
-
-| Service | Port | Description |
-| :--- | :--- | :--- |
-| **Guest Frontend** | `8090` | Public-facing portfolio page |
-| **Admin Frontend** | `8091` | Admin dashboard panel |
-| **Backend REST API** | `5000` | Node.js Express API server |
-| **Adminer UI** | `8085` | Database interface client |
-
----
-
-## Production Security Best Practices
-
-When deploying to a public server:
-
-1. **Reverse Proxy & SSL**: Bind a reverse proxy (such as Nginx or Caddy) on the host machine to handle SSL/TLS termination (HTTPS) and route traffic to the containerized ports (`8090` and `8091`).
-2. **Access Control**: Keep ports like `8085` (Adminer) and `8091` (Admin Frontend) blocked from the public internet using firewall configurations (e.g., UFW). Ideally, access them only through a private VPN or use Nginx basic authentication.
-3. **Secrets Management**: Replace default PostgreSQL credentials in `docker-compose.yml` with strong, randomly generated passwords before building the production image.
-4. **Data Backups**: Regularly backup volume mounts `postgres_data` (for the database state) and `uploads_data` (for uploaded portfolio images).
